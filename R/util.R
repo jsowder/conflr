@@ -52,11 +52,13 @@ confl_verb <- function(verb, path, ...) {
 
   username <- Sys.getenv("CONFLUENCE_USERNAME") %|""|% ask_confluence_username()
   password <- Sys.getenv("CONFLUENCE_PASSWORD") %|""|% ask_confluence_password()
+  api_key <- Sys.getenv("CONFLUENCE_API_KEY")
 
   res <- httr::VERB(
     verb = verb,
     url = glue("{base_url}/rest/api{path}"),
-    httr::authenticate(username, password),
+    httr::authenticate(username, password, 
+                       config = list(add_headers(x-api-key = api_key))),
     ...
   )
 
