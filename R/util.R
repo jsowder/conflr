@@ -58,7 +58,7 @@ confl_verb <- function(verb, path, ...) {
     verb = verb,
     url = glue("{base_url}/rest/api{path}"),
     httr::authenticate(username, password),
-    add_headers(`x-api-key` = api_key),
+    httr::add_headers(`x-api-key` = api_key),
     ...
   )
 
