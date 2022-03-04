@@ -57,7 +57,8 @@ confl_verb <- function(verb, path, ...) {
   res <- httr::VERB(
     verb = verb,
     url = glue("{base_url}/rest/api{path}"),
-    httr::authenticate(username, password),
+    httr::authenticate(username, password,
+                      type = "ntlm"),
     httr::add_headers(`x-api-key` = api_key),
     ...
   )
